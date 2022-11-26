@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto+Mono:wght@300;500&display=swap");
+
+/* styles over all the project */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+  /* light mode (defult) */
+  --primary-color: #ffffff;
+  --secondary-color: #9084db;
+  --third-color: #f4f5f9;
+  --border: solid 2px #e5eaee;
+  --border-color: #e5eaee;
+  --drak-icon-color: #94979c;
+  --text-color: #49494a;
+}
+
+/* dark mode */
+[data-theme="dark"] {
+  --primary-color: #0b2545;
+  --secondary-color: #1b2841;
+  --third-color: #0f1633;
+  --border: solid 2px #374857;
+  --border-color: #1b4c75;
+  --drak-icon-color: #94979c;
+  --text-color:var(--border-color)
+}
+
+
+/* content-area is the left area of screen that contains header and contens */
+.content-area {
+  height: 100%;
+  transition: 0.3s;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  background: -webkit-linear-gradient(142deg, #c2bceb 0%, #eeeded 50%);
+  background: linear-gradient(180deg, #c2bceb 2%, #eeeded 40%);
+}
+
+.content-area button {
+  background-color: slateblue;
+}
+
+
+@media (max-width:630px),
+(max-height:630px) {
+  .content-area.view {
+    transform: translate(-100%);
+  }
+}
+
+@media (min-width:631px) and (min-height:431px) {
+  .content-area {
+    width: auto;
+    transform: unset;
+    flex: 1;
+    /* make it stetch to take all the width */
+  }
+
+  .content-area .arrow-icon {
+    display: none;
+  }
+
+  .content-area .examly-search {
+    display: block;
+  }
+
+}
+
+
+/* scroll bar styles */
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 15, 255, 0.5);
+}
+
+
+hr {
+  width: 90%;
+  border-radius: 4px;
+  background-color: var(--border-color);
+  outline: 0;
+}
+
+img {
+  width: auto;
+}
+
+.main-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layout {
+  display: flex;
+  justify-content: center;
+  width: 200%;
+  height: 100%;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+button {
+  border: none;
+  outline: none;
+  color: antiquewhite;
+  font-size: large;
+}
+
+@media (min-width: 631px) and (min-height: 431px) {
+  .layout {
+    width: 100%;
+    max-width: 1500px;
+    min-width: 100vw;
+  }
+  .main-container {
+    display: flex;
+    justify-content: center;
+  }
+}

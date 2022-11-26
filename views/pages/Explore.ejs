@@ -1,0 +1,100 @@
+<div class="explore-container">
+              
+        <div id="head-content">
+                                <div class="inner-col-content" id="inner-1"> 
+                                        <h1  id="explore-container-topic">Explore</h1>
+                                        <h2 id="head-pargraph">Explore the courses and select what you will study today 🔥🧠!<span> </span><h2>
+                                </div>
+                                <div class="inner-col-content" id="inner-2">
+                                        <img src="/images/Office-Chillout.png">
+                                </div>
+                </div>
+        
+
+        <div class="explore-flex">
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions some formulas'})%> 
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions some formulas'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%> 
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%><%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+                <%- include("../../public/components/cards.ejs",{header:'MATH191', description:'integeral and integraions'})%>
+        
+        </div>
+</div>
+
+<!-- style -->
+<style>
+        .explore-container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                flex-direction: column;
+        }
+
+        .explore-flex{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                justify-content: center;
+        }
+
+        #explore-container-topic{
+                margin: 1rem auto 8vh auto;
+                font-size: 14vh;
+                font-weight: 600;
+                background-image: linear-gradient(to left, #553c9a, #b393d3);
+                color: transparent;
+                background-clip: text;
+                -webkit-background-clip: text;
+        }
+        #head-content{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                text-align: left;
+                margin: 3vh auto 4vh auto;
+                width: 100%;
+        }
+        img{
+                height: 40vh;
+                margin: auto;
+        }
+        .inner-col-content{
+                margin: auto 15vh auto 5vh;
+        }
+        #inner-1{
+                margin: 0 15vh auto 1vh;
+                padding: 0px auto auto 0px;
+        }
+        #inner-2{
+                margin: auto 20vh auto 5vh;
+                padding: auto;
+                margin: auto;
+        }
+        #head-pargraph{
+                text-align: justify;
+                letter-spacing: 3px;
+                font: 4vh Arial, Helvetica, sans-serif;
+                color: var(--text-color);
+        }
+
+</style>
