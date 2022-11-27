@@ -1,11 +1,10 @@
-<!-- page is the path of the page called by any router -->
-<!-- this recives user variable which can be admin, quest, student -->
+<!-- this recieves user variable which can be admin, quest, student -->
 <div id="content">
         <div class="pages">
                 <div id="myCourses-page">
                         <%- include('../pages/Explore.ejs') %>
                 </div> 
-                <!--  -->
+                <!-- adding my courses and history for student user -->
                 <% if (user=='student' ) { %>
                         <div id="myCourses-page">
                                 <%- include('../pages/MyCourses.ejs') %>
@@ -16,6 +15,7 @@
                         </div>
                 <% } %>
                 
+                <!-- adding requests and users pages for admin user -->
                 <% if (user=='admin' ) { %>
                         <div id="requests-page">
                                 <%- include('../pages/Requests.ejs') %>
