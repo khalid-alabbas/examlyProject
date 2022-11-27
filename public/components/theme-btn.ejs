@@ -1,0 +1,51 @@
+<div id="theme-btn">
+        <div class="theme-cir" id="theme-cir1"></div>
+        <div class="theme-cir" id="theme-cir2"></div>
+</div>
+
+<style>
+        #theme-btn{
+                height: 26px;
+                min-width: 26px;
+                border: var(--border);
+                margin-left: auto;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+        }
+
+        #theme-btn:hover{
+                transform: rotate(180deg);
+        }
+        .theme-cir{
+                height: 20px;
+                width: 10px;
+        }
+
+        #theme-cir1{
+                border-bottom-left-radius: 150px;
+                border-top-left-radius: 150px;
+        }
+
+        #theme-cir2{
+                border-bottom-right-radius: 150px;
+                border-top-right-radius: 150px;
+                background-color: var(--secondary-color);
+
+        }
+
+
+</style>
+
+<script>
+        const themeBtn = document.getElementById('theme-btn')
+        themeBtn.addEventListener('click',()=>{
+                if (document.body.hasAttribute('data-theme')){
+                        document.body.removeAttribute('data-theme')
+                }else{
+                        document.body.setAttribute('data-theme','dark')
+                }
+        })
+</script>
