@@ -14,6 +14,12 @@
         margin: 20px 0;
 }
 
+.side-bar hr{
+        background-color: var(--border-color);
+        border: var(--border-color);
+        height: 2px;
+}
+
 .side-bar button {
         background-color: slateblue;
         height: 5%;
@@ -27,7 +33,7 @@
 }
 
 .side-bar h1 {
-        color: gray;
+        color: var(--sidebar-text-color);
         text-shadow: 0 0 3px gray;
         width: 100%;
         display: flex;
@@ -62,8 +68,8 @@
         height: 40px;
         align-items: center;
         justify-content: flex-start;
-        font-size: 1.71em;
-        color: #777;
+        font-size: 1.31em;
+        color: var(--sidebar-text-color);
         margin: 10px 0;
         transition: 0.3s;
         cursor: pointer;
@@ -87,20 +93,30 @@
         color: gray;
 }
 
+
+
+
 /* view system fot mobiles  */
-@media (max-width:630px),
-(max-height:630px) {
+@media (max-width:630px){
         .side-bar.view {
                 transform: translateX(-100%);
         }
+
 }
 
 /* for tablets and larger */
-@media (min-width:631px) and (min-height:431px) {
+@media (min-width:631px)  {
         .side-bar {
                 width: min(10%, 200px);
                 min-width: 250px;
                 transform: unset;
-                border-right: var(--border-color) solid 3px;
+                border-right: var(--border-color) solid 2px;
         }
-}
+
+        /* closed side bar style */
+                [mode="close"] {
+                        min-width: 0px;
+                        width: 0px;
+                        border: 0;
+                }
+        }
