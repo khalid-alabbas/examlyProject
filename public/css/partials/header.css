@@ -30,7 +30,7 @@
         height: 80%;
         padding-left: 14px;
         font-family: Arial, Helvetica, sans-serif;
-        color: rgb(24, 24, 24);
+        color: var(--sidebar-text-color);
         background-color: transparent;
         margin-right: auto;
 }
@@ -40,7 +40,7 @@
         background: transparent;
         padding-left: 8px;
         width: 120px;
-        color: gray;
+        color: var(--sidebar-text-color);
         white-space: nowrap;
         font-size: 0.70em;
         padding-left: 0 auto;

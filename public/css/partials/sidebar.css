@@ -13,13 +13,6 @@
 .side-bar * {
         margin: 20px 0;
 }
-
-.side-bar hr{
-        background-color: var(--border-color);
-        border: var(--border-color);
-        height: 2px;
-}
-
 .side-bar button {
         background-color: slateblue;
         height: 5%;
