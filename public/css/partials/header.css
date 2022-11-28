@@ -8,6 +8,7 @@
         background-color: var(--header-bg-color);
         height: 5%;
         font-size: 1.1em;
+        justify-content: space-between;
 }
 
 .header .search-bar {

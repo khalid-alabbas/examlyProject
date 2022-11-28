@@ -12,6 +12,7 @@
         flex-wrap: wrap;
         gap: 30px;
         justify-content: center;
+        /* max-width: 1000px; */
 }
 
 #explore-container-topic {
