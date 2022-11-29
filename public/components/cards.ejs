@@ -1,5 +1,6 @@
 <!-- pass the title of card as variable called header and description as description -->
-<div class="outer">
+
+<div class="card-outer" id="<%=header%> ">
         <div class="card-header"><h1><%=header %></h1> </div>
         <div class="card-description">
                 <%=description %>  
@@ -9,7 +10,7 @@
 
 <!-- styles -->
 <style>
-.outer {
+.card-outer {
         background-color: var(--primary-color);
         box-shadow: 1px 1px 10px -2px black;
         display: inline-flex;
@@ -24,16 +25,16 @@
         cursor: pointer;
 }
 
-.outer:hover{
+.card-outer:hover{
         transform: translateY(-10px);
 }
-.outer .card-header {
+.card-outer .card-header {
         color: var(--text-color);
         width: 100%;
         height: 40px;
         font-size: 0.8em;
         }
-.outer .card-description {
+.card-outer .card-description {
         color: gray;
         width: 100%;
 }

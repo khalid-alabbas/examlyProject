@@ -2,53 +2,40 @@
 <link rel="stylesheet" href="../css/partials/content.css">
 <div id="content">
         <div class="pages">
-                <div id="myCourses-page">
+                <div id="explore-pages">
                         <%- include('../pages/Explore.ejs') %>
                 </div> 
                 <!-- adding my courses and history for student user -->
                 <% if (user=='student' ) { %>
-                        <div id="myCourses-page">
+                        <div id="myCourses-pages">
                                 <%- include('../pages/MyCourses.ejs') %>
                         </div>
 
-                        <div id="history-page">
+                        <div id="history-pages">
                                 <%- include('../pages/History.ejs') %>
                         </div>
                 <% } %>
                 
                 <!-- adding requests and users pages for admin user -->
                 <% if (user=='admin' ) { %>
-                        <div id="requests-page">
+                        <div id="requests-pages">
                                 <%- include('../pages/Requests.ejs') %>
                         </div>
                         
-                        <div id="users-page">
+                        <div id="users-pages">
                                 <%- include('../pages/Users.ejs') %>
                         </div>
                 <% } %> 
 
 
-                <div id="settings-page">
+                <div id="settings-pages">
                         <%- include('../pages/Settings.ejs') %>
                 </div>
 
-                <div id="aboutUs-page">
+                <div id="aboutUs-pages">
                         <%- include('../pages/AboutUs.ejs') %>
                 </div>
 </div>
 </div>
 
-<script>
-        menuButtons = document.querySelectorAll('.menu-element')
-        menuItemsNum = menuButtons.length//how many menu items depends on type of user
-        pages = document.getElementsByClassName('pages')[0]
-        pages.style.height=(menuItemsNum+'00%')
-
-        menuButtons.forEach((element,index) => {
-                element.addEventListener('click',()=>{
-                        [...pages.children].forEach((el)=>{
-                                el.style.transform  = 'translateY(-'+(index) + '00%)'
-                        })
-                })
-        });
-</script>
+<script src="../js/layout-navigator.js"></script>

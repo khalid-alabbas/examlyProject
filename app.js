@@ -19,14 +19,35 @@ app.listen(3000);
 // middleware of static files (public folder)
 app.use(express.static('public'))
 
-
+let departments = [{
+        department: 'Mathimatics',
+        courses: [{
+                header: 'math101',
+                description: 'deriviatives'
+                }, {
+                header: 'math102',
+                description: 'integraion formulas'
+                }
+                ]},
+        
+        {
+        department: 'Information and computer',
+        courses: [{
+                header: 'ics101',
+                description: 'javascript'
+                }, {
+                header: 'ics102',
+                description: 'c#'
+                }
+                ]}]
+console.log(departments.length)
 // route login
 app.get('/main', (req, res) => {
         res.render('main',{user:'quest'})
 })
 
 app.get('/student', (req, res) => {
-        res.render('main',{user:'student'})
+        res.render('main', { user: 'student', departments: departments })
 })
 
 app.get('/admin', (req, res) => {

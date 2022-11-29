@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="../css/pages/explore.css">
 
-<div class="explore-container">
-        <div id="head-content">
+<div class="explore-container explore-page-1">
+
+                        <div id="head-content">
                                 <div class="inner-col-content" id="inner-1"> 
                                         <h1  id="explore-container-topic">Explore</h1>
                                         <h2 id="head-pargraph">Explore the courses and select what you will study today 🔥🧠!<span> </span><h2>
@@ -13,8 +14,19 @@
         
 
         <div class="explore-flex">
-                <%- include("../../public/components/cards-slider.ejs",{department:"Mathimatics", header:'MATH191', description:'integeral and integraions'})%>
-                <%- include("../../public/components/cards-slider.ejs",{department:"ICS", header:'ICS102', description:'programming languages'})%>
+                <% departments.forEach((el)=>{%>
+                        <%-include("../../public/components/cards-slider.ejs",{type:'courses',title:el.department, cards:el.courses})%>
+                <%}) %> 
+                
+
+        </div>
+        </div>
+
+
+<div class="explore-container course-page">
+
+        <div class="explore-flex">
+        <%-include("../../public/components/course-page.ejs",{type:'courses', cards:null})%>
 
         </div>
 </div>
