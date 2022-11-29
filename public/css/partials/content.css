@@ -23,8 +23,9 @@
 .pages>*>* {
         overflow-y: scroll;
         overflow-x: hidden;
-        height: fit-content;
+        height: 100%;
         width: 100%;
         max-width: 100%;
         padding: 20px;
+
 }
