@@ -17,7 +17,7 @@ app.set('view engine', 'ejs')
 app.listen(3000);
 
 // middleware of static files (public folder)
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 
 let departments = [{
         department: 'Mathimatics',
@@ -43,7 +43,7 @@ let departments = [{
 console.log(departments.length)
 // route login
 app.get('/main', (req, res) => {
-        res.render('main',{user:'quest'})
+        res.render('main', { user: 'quest', departments: departments })
 })
 
 app.get('/student', (req, res) => {
@@ -51,7 +51,7 @@ app.get('/student', (req, res) => {
 })
 
 app.get('/admin', (req, res) => {
-        res.render('main',{user:'admin'})
+        res.render('main', { user: 'admin', departments: departments })
 })
 // handling the requests 
 app.use((req, res) => {
