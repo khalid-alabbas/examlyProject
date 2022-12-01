@@ -1,14 +1,13 @@
 <!-- DOM elements (html) -->
-<link rel="stylesheet" href="../css/partials/sidebar.css">
 <!-- this recives user variable which can be admin, quest, student -->
-<div class="side-bar">
+<div class="side-bar view " mode="close">
         <h1 id="examly-logo">
                 <img src="data:image/png;base64,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" />
                         Examly</h1>
 <hr>
         <div class="main-menu">
                 <!-- Explore button -->
-                <div id="explore-button" class="menu-element">
+                <div id="explore-button" class="menu-element" onclick=exploreEvent()>
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAAXNSR0IArs4c6QAAAxJJREFUaEPtmsGV2jAQhjXi8eCWTQdsBZAKsqkgpIJsOiAHLN1CbpY5hA5CKsimA1JB2AqyqSDsDS6evOGZfbYiIxlkLHjrG1iW59NIo3/GAnahF1woF3sGOzfPVvLYaDS6arfbfQC4ORaUc/4tjuOHY/spe94ZLIqiIQB8ZYxdeTJmlabpm+l0uvTUX6EbJ7DxeDzgnP+qwYDa4JzAhBB3jLG3NYBRl7XAuYL99TgFTePjHc4VDPPWAMDnOI4nh3gwm9YLxtgL7XmvcCcHI5hTwDUCdgq4xsDqhmsUrE64xsHqggsCrA64YMB8wwUF5hMuODBfcEGCWeAelFLXNtUTLNg+OKWU1W5rA3qBEMKbVrSNtH5fSjlBxE/5/4MAk1L2ELGPiAMyDgCWAHDvmj0HByalvMlGuqyMsMiyBFL6pVdQYEIIKiHcOk67uVLqQ1nbYMAqQu14SuGCADMZ4eg1WnvG5LVxMCrNdTqd34YSwj0iTjjn22pUmqYDAKDsu69n0JvN5no2m63y/zcOFkXRCAC+aMb+UEoNTV4zFYgQ8WOSJLOgwKSUC0R8nTPqcbPZ9HQP7O5nHqaC6VPtAwB+xnFciKKNe0wIoVeySr21gzMMxkop9TIojx2iTly84dLGNNW9SSohBC36fEntEI8xXS41DmaaVqYop62xQhQNco2VRMU7pdS7kqj4nTFWiJhBRkVTlMuAaP+akPCl3ySI6TdjbCuKbVG08alIBh6jPMo+TgQBlsHNEfG9q5TS1Yf+zSwYMN9wQYFlcKQgKPvNq5EnB1EEZIyRd0lClX55CQ4spy56JHw559tgkabpkgTxLoO2fXlptVrDIEsDLmttHxxjjDLswrYQRM3DBYza7IH7r4uzAqsCd3ZgrnA+wXSB6zrDvLcDgD9xHPdsHbuq+zqPQ9hs1O9bswZ6wAmsxgMsVaFou3jlcprHCYzenh05mhs208rGHfjAIyLeJklCs8d6OYNRT6Tgu90ubbRHHxKzWlZssFiv18uy+ompr0pgFY1ptPkzWKPDf8DLL9Zj/wDbA/FVGp/dBwAAAABJRU5ErkJggg=="/>
                         Explore
                 </div>
@@ -64,3 +63,9 @@
 
 
 </div>
+
+<script>
+        function exploreEvent() {
+                window.location.href = `/explore`
+        }
+</script>

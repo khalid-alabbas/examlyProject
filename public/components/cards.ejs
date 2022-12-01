@@ -1,41 +1,24 @@
 <!-- pass the title of card as variable called header and description as description -->
 
-<div class="card-outer" id="<%=header%> ">
-        <div class="card-header"><h1><%=header %></h1> </div>
+<div class="card-outer" id="<%=header%> " onclick="cardslistenr(this)">
+        <div class="card-header"><h1><%=header%></h1> </div>
         <div class="card-description">
                 <%=description %>  
         </div>
 </div>
 
+<script>
+        function cardslistenr(card){
+                if (window.location.toString().includes('explore')){
+                        window.location.href = `/courses/${card.id.trim()}`
+                }
+                if (window.location.toString().includes('courses')) {
+                        window.location.href += `/exams/${card.id.trim()}`
+                }
+        }
+</script>
 
 <!-- styles -->
 <style>
-.card-outer {
-        background-color: var(--primary-color);
-        box-shadow: 1px 1px 10px -2px black;
-        display: inline-flex;
-        flex-direction: column;
-        width: 270px;
-        height: 120px;
-        padding: 20px;
-        transition: 0.2s;
-        border: var(--border);        
-        border-top: solid 4px #FFD622;
-        border-radius: 5px;
-        cursor: pointer;
-}
 
-.card-outer:hover{
-        transform: translateY(-10px);
-}
-.card-outer .card-header {
-        color: var(--text-color);
-        width: 100%;
-        height: 40px;
-        font-size: 0.8em;
-        }
-.card-outer .card-description {
-        color: gray;
-        width: 100%;
-}
 </style>

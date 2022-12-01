@@ -1,9 +1,19 @@
 <!-- this recieves user variable which can be admin, quest, student -->
-<link rel="stylesheet" href="../css/partials/content.css">
 <div id="content">
         <div class="pages">
+
                 <div id="explore-pages">
-                        <%- include('../pages/Explore.ejs') %>
+                        <% if (page=='explore'){ %> 
+                                <%- include('../pages/Explore.ejs') %>
+                        <% } else if (page == 'course') { %>
+                                <%- include('../pages/Course.ejs') %>                        
+                        <% } else if (page=='exam' ) { %>
+                                <%- include('../pages/Exam.ejs') %>
+                        <% } else if (page=='review') { %>
+                                <%- include('../pages/Review.ejs') %>
+                        <% } else if (page=='addexam' ) { %>
+                                <%- include('../pages/AddExam.ejs') %>
+                        <% } %>
                 </div> 
                 <!-- adding my courses and history for student user -->
                 <% if (user=='student' ) { %>
@@ -38,4 +48,3 @@
 </div>
 </div>
 
-<script src="../js/layout-navigator.js"></script>
