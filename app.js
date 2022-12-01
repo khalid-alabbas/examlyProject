@@ -1,5 +1,9 @@
 import express from 'express'
 import path from 'path'
+import mongoose from 'mongoose'
+import User from './models/User.js'
+
+
 // const courseRouter = require('routes/courseRoutes.js')
 // because ES6 doesn't have __dirname
 const __dirname = path.resolve()
@@ -7,18 +11,23 @@ const __dirname = path.resolve()
 // express app
 const app = express();
 
+//for testing
+const user = new User({username:'jamel aldin'}).save()
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 
 // mongoDB databese connection 
-const dbURI = ''// we need the link of MongoDB here  
+const dbURI = 'mongodb+srv://khalid:t1234@examlydb.nyagend.mongodb.net/examly?retryWrites=true&w=majority' 
+mongoose.connect(dbURI).then((result) => app.listen(3000)).catch((err) => (console.log(err)))
+
+
 
 // using ejs as a view engine
 app.set('view engine', 'ejs')
 
-// open a port for requests
-app.listen(3000);
 
 // middleware of static files (public folder)
 app.use(express.static('public'))
