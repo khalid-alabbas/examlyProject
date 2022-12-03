@@ -2,6 +2,8 @@ import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
 import User from './models/User.js'
+//import department from './models/department.js'
+import Courses from './models/Course.js'
 
 
 // const courseRouter = require('routes/courseRoutes.js')
@@ -12,10 +14,38 @@ const __dirname = path.resolve()
 const app = express();
 
 //for testing
-const user = new User({username:'jamel aldin'}).save()
+//const user = new User({
+//        firstname:'jamel'
+//        ,lastname: 'aldin'
+//        ,email:'jamel@gmail.com' 
+//        ,password:'jamel aldin' 
+//}).save()
 
+// const user = new User({
+//         firstname:'khalid2',
+//         lastname:'alabbas2',
+//         email:'test@gmail.com2',
+//         password:'12342',
+//         favCourses:[
+//                 {
+//                 userId:'test@gmail.com2'
+//                 ,courseId:'1'
+//                 }
+//         ]
+//         ,results:[
+//                 {
+//                 userId:'test@gmail.com2'
+//                 ,exam:'MATH101'
+//                 ,score:'4/10'
+//                 }
+//         ]
+// }).save();
 
-app.use(express.json());
+// const res = User.findOne({
+//         'favCourses.userId':'test@gmail.com2'
+// })
+// console.log('resulst: ', res);
+// app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 
@@ -33,6 +63,13 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 
+
+//const department = new department({
+        //        department:'Mathimatics'
+        //        ,courseHeader: 'math101'
+        //        ,courseDescription:'deriviatives' 
+        //        
+        //}).save()
 
 let departments = [{
         department: 'Mathimatics',
@@ -111,7 +148,7 @@ let questions = [{
 ]
 app.get('/courses/:course/exams/:exam', (req, res) => {
         //request for exam questions data as above (you can take the course name and exam name by req.params.course , req.params.exam)
-        console.log(req.params.course)//for testing 
+        console.log(req.params.course)//for testing
         console.log(req.params.exam)
 
         res.render('main', { examName: req.params.exam, user: 'admin', questions: questions, page: 'exam' })
@@ -128,8 +165,8 @@ app.post('/courses/:course/exams/:exam/reviewExam', (req, res) => {
 
         //dummy correct answers object (in real database get the questions of exam as the object above and the correct answers)
         let correctAnswers = ['apple', 'i hate toefl', 'chicken', 'no']
-        
         res.render('main', {user: 'admin',recivedAnsewrs:recivedAnsewrs ,questions: questions, correctAnswers: correctAnswers, page:'review'})
+
 
 })
 
@@ -141,22 +178,35 @@ app.get('/courses/:course/add/:examType/exam', (req, res) => {
 })
 
 //reciveing data of the added exam, add the exam to database then redirect the user to the course page
-app.post('/courses/:course/add/:examType/exam/data', (req, res) => {
+app.post('/courses/:course/add/:examType/exam/data', async(req, res) => {
+        console.log('test');
         console.log(req.body)//add those data to database
-
-        
+                
+                //const department = new department({
+                        //        department:'Mathimatics'
+                        //        ,courseHeader: 'math101'
+                        //        ,courseDescription:'deriviatives'
+                        //
+                        //}).save()
         res.redirect(`/courses/${req.params.course}`);
-
-})        
+})
 
 //reciveing data of the added course, add the course to database then redirect the user to the explore page
-app.post('/explore/add/:department/courses', (req, res) => {
-        console.log(req.body)//add those data to database
+app.post('/explore/add/:department/courses',async (req, res) => {
+        //console.log(req.body)//add those data to database
 
-        
+
+        // ### will add the data from the form to the 'courses' ###
+        const{ID,description}=req.body;
+                const newCourse = new Courses({
+                        ID:ID,
+                        description:description})
+                        .save()
+
+
         res.redirect(`/explore`);
 
-})  
+})
 
 // handling the requests for 404 page
 app.use((req, res) => {
