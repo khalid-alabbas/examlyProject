@@ -4,7 +4,7 @@ import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
 import User from './models/User.js'
-//import department from './models/department.js'
+import {department ,departmentSchema} from './models/department.js'
 import Courses from './models/Course.js'
 import mysql from 'mysql'
 
@@ -67,6 +67,8 @@ const connection = mysql.createPool({
 app.use(express.urlencoded({extended: true}))
 
 
+
+
 // mongoDB databese connection 
 const dbURI = 'mongodb+srv://khalid:t1234@examlydb.nyagend.mongodb.net/examly?retryWrites=true&w=majority' 
 mongoose.connect(dbURI).then((result) => app.listen(3000)).catch((err) => (console.log(err)))
@@ -80,7 +82,37 @@ app.set('view engine', 'ejs')
 // middleware of static files (public folder)
 app.use(express.static('public'))
 
-
+// const Newdepartments = new department({
+//         departmentName:'math',
+//             courses:[
+//                 {
+//                 courseHeader:'math101',
+//                 courseDescription:'Description for math 101'
+//                 ,quizzes:[{
+//                         header:'quiz1',
+//                         description:'this test',
+//                     },{
+//                         header:'quiz2',
+//                         description:'this test2',
+//                     }]
+//                     ,majors:[{
+//                         header: 'major1--183',
+//                         description: 'this cover all chapter 1'
+//                     },{
+//                         header: 'major2--182',
+//                         description: 'this cover all chapter 2'
+//                     }
+//                 ]
+//                     ,midterms:[{
+//                         header: 'midterm1-183',
+//                         description: 'this cover all chapter 1'
+//                     },{
+//                         header: 'midterm1-191',
+//                         description: 'this cover all chapter 1'
+//                     }]
+//         }
+// ]
+//         }).save()
 
 //const department = new department({
         //        department:'Mathimatics'
@@ -88,6 +120,9 @@ app.use(express.static('public'))
         //        ,courseDescription:'deriviatives' 
         //        
         //}).save()
+
+
+
 
 let departments = [{
         department: 'Mathimatics',
@@ -114,37 +149,66 @@ let departments = [{
 app.get('/explore', (req, res) => {
         // get database request for departemnts like the dummy objects above for rendering the explore page
         res.render('main', { user: 'admin', departments: departments, page:'explore'})
+        connection.query(`select departmentID, departmentName,courseName,description from examlydb.department join examlydb.course ON department.departmentID=course.department_departmentID`, function(err,results,fields){
+                if(err)
+                console.log(err);
+                else
+                console.log("DONE")
+                //console.log(results);
+                const depID=JSON.parse(JSON.stringify(results))
+                // console.log(depID);
+                })
+                // let departments = [{
+                //         department: 'Mathimatics',
+                //         courses: [{
+                //                 header: 'math101',
+                //                 description: 'deriviatives'
+                //                 }
+                //                 ]}]
 })
 
 
         let quizzes = [{
-                header: 'quiz1-wasfi-183',
+                header: 'quiz1-183',
                 description: 'this cover all chapter 1'
         },{
-                header: 'quiz2-alherz-201',
+                header: 'quiz2-201',
                 description: 'this cover all chapter 3'
                 }]
         
         let majors = [{
-                header: 'major1-wasfi-183',
+                header: 'major1-183',
                 description: 'this cover all chapter 1'
         },{
-                header: 'major2-alherz-201',
+                header: 'major2-201',
                 description: 'this cover all chapter 3'
         }]
                 
         let midterms = [{
-                header: 'midterm1-wasfi-183',
+                header: 'midterm1-183',
                 description: 'this cover all chapter 1'
         },{
-                header: 'midterm2-alherz-201',
+                header: 'midterm2-201',
                 description: 'this cover all chapter 3'
                 }]
 
-app.get('/courses/:course', (req, res) => {
-        // request to database to get the course as shown above (you can take the course name by req.params.course)
-        console.log(req.params.course)
+app.get('/courses/:course',  async (req, res) => {
+        var quizzes;
+        await department.findOne({"courses.courseHeader":`${req.params.course}`}).then((results)=>
+        {
+                //res.send(results)
+                //console.log(results.courses);
+                quizzes = results.courses[0].quizzes; 
+                //console.log(quizzes);
+
+                
+
+        }).catch((err)=>{
+                console.log(err);
+        })
         res.render('main', {courseName:req.params.id,user: 'admin', quizzes: quizzes , page:'course', majors:majors , midterms: midterms})
+        //console.log(quizzes);
+        // request to database to get the course as shown above (you can take the course name by req.params.course)
 })
 
 
@@ -196,41 +260,23 @@ app.get('/courses/:course/add/:examType/exam', (req, res) => {
 
 //reciveing data of the added exam, add the exam to database then redirect the user to the course page
 app.post('/courses/:course/add/:examType/exam/data', async(req, res) => {
-        console.log('test');
+        console.log('data');
         console.log(req.body)//add those data to database
         res.redirect(`/courses/${req.params.course}`);
 })
 
 //reciveing data of the added course, add the course to database then redirect the user to the explore page
 app.post('/explore/add/:department/courses',async (req, res) => {
-        //console.log(req.body)//add those data to database
-        const depName= req.params.department
-        console.log(depName);
-        connection.query(`select departmentID from examlydb.department where replace(departmentName,' ','') = '${depName}'`, function(err,results,fields){
-                if(err)
-                console.log(err);
-                else
-                console.log("DONE");
-                const depID=JSON.parse(JSON.stringify(results))
-                const courseName = req.body.ID;
-                const description= req.body.description;
-                console.log(req.body);
-                console.log(courseName,description,depID);
-                const departmentID = depID[0].departmentID
-               // console.log(departmentID);
 
-                connection.query('INSERT INTO examlydb.course (`courseName`,`department_departmentID`,`description`) VALUES(?,?,?)',[courseName,departmentID,description],(err,res)=>{
-                if(err)
-                console.log(err);
-                else
-                console.log("DONE");
-        })
-                if(err){
-                        console.log(err);
+        const Newdepartments = new department({
+                departmentName:'test',
+                    courses:[
+                        {
+                        courseHeader:'math101',
+                        courseDescription:'math101math101'
                 }
-        })
-
-
+        ]
+                }).save()
 
         res.redirect(`/explore`);
 
