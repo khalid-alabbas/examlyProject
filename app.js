@@ -31,6 +31,29 @@ const connection = mysql.createPool({
         }
     });
     
+//tring for signin/up popup 
+//import bodyParser from 'body-parser'
+//defining mogoose and parser (NOT working!)
+// var bodyParser = require('body-parser')
+// var mongoose = require('mongoose')
+
+
+//for testing (//tring for signin/up popup ):
+// app.use(bodyParser.json())
+// app.use(express.static('public'))
+// app.use(bodyParser.urlencoded({
+//         extended: true
+// }))
+// app.get('/explore', (req,res) =>{
+//         res.set({
+//                 "Allow-access-Allow-Origin": '*' 
+//         })
+// }).listen(2000);
+// console.log('listning in port 2000');
+
+
+
+
 //for testing
 //const user = new User({
 //        firstname:'jamel'
@@ -289,3 +312,30 @@ app.use((req, res) => {
         })
         res.render('404')
 })
+
+
+
+//tring for signin/up popup 
+// db.once('open', ()=> console.log('connected to Db'))
+// app.post('/signup',(req,res)=>{
+//    var firstname = req.body.firstname;      
+//    var lastname = req.body.lastname;      
+//    var email = req.body.email;      
+//    var password = req.body.password;      
+
+//    var user = {
+//         "firstname": firstname,
+//         "lastname": lastname,
+//         "email": email,
+//         "password": password,
+//         }   
+
+//    db.collection('users').insertOne(user, (err,collection)=>{
+//         if(err){
+//                 console,log(err);
+//         }
+//         console.log("Record insert seccussfully!");
+//    });
+//    //redirect to seccuful-popup : i don't think we need it bcz i done it in signin-up-poppup file
+// //    return res.redirect('signin-up-popup.ejs')     
+// })
