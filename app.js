@@ -147,40 +147,55 @@ app.use(express.static('public'))
 
 
 
-let departments = [{
-        department: 'Mathimatics',
-        courses: [{
-                header: 'math101',
-                description: 'deriviatives'
-                }, {
-                header: 'math102',
-                description: 'integraion formulas'
-                }
-                ]},
+// let departments = [{
+//         department: 'Mathimatics',
+//         courses: [{
+//                 header: 'math101',
+//                 description: 'deriviatives'
+//                 }, {
+//                 header: 'math102',
+//                 description: 'integraion formulas'
+//                 }
+//                 ]},
         
-        {
-        department: 'Information and computer',
-        courses: [{
-                header: 'ics101',
-                description: 'javascript'
-                }, {
-                header: 'ics102',
-                description: 'c#'
-                }
-                ]}]
+//         {
+//         department: 'Information and computer',
+//         courses: [{
+//                 header: 'ics101',
+//                 description: 'javascript'
+//                 }, {
+//                 header: 'ics102',
+//                 description: 'c#'
+//                 }
+//                 ]}]
+//                 courseHeader
 
-app.get('/explore', (req, res) => {
+app.get('/explore', async (req, res) => {
         // get database request for departemnts like the dummy objects above for rendering the explore page
-        res.render('main', { user: 'admin', departments: departments, page:'explore'})
-        connection.query(`select departmentID, departmentName,courseName,description from examlydb.department join examlydb.course ON department.departmentID=course.department_departmentID`, function(err,results,fields){
-                if(err)
+        
+        // ############### is done but need help to find where does it go.
+        var departments;
+        await department.find({department}).then((results)=>
+        {
+                //res.send(results)
+                //console.log(results.courses);
+                departments = results;
+                console.log(results);
+
+        }).catch((err)=>{
                 console.log(err);
-                else
-                console.log("DONE")
-                //console.log(results);
-                const depID=JSON.parse(JSON.stringify(results))
-                // console.log(depID);
-                })
+        })
+        res.render('main', { user: 'admin', departments: departments, page:'explore'})
+
+        // connection.query(`select departmentID, departmentName,courseName,description from examlydb.department join examlydb.course ON department.departmentID=course.department_departmentID`, function(err,results,fields){
+        //         if(err)
+        //         console.log(err);
+        //         else
+        //         console.log("DONE")
+        //         //console.log(results);
+        //         const depID=JSON.parse(JSON.stringify(results))
+        //         // console.log(depID);
+        //         })
                 // let departments = [{
                 //         department: 'Mathimatics',
                 //         courses: [{
@@ -191,42 +206,40 @@ app.get('/explore', (req, res) => {
 })
 
 
-        let quizzes = [{
-                header: 'quiz1-183',
-                description: 'this cover all chapter 1'
-        },{
-                header: 'quiz2-201',
-                description: 'this cover all chapter 3'
-                }]
+        // let quizzes = [{
+        //         header: 'quiz1-183',
+        //         description: 'this cover all chapter 1'
+        // },{
+        //         header: 'quiz2-201',
+        //         description: 'this cover all chapter 3'
+        //         }]
         
-        let majors = [{
-                header: 'major1-183',
-                description: 'this cover all chapter 1'
-        },{
-                header: 'major2-201',
-                description: 'this cover all chapter 3'
-        }]
+        // let majors = [{
+        //         header: 'major1-183',
+        //         description: 'this cover all chapter 1'
+        // },{
+        //         header: 'major2-201',
+        //         description: 'this cover all chapter 3'
+        // }]
                 
-        let midterms = [{
-                header: 'midterm1-183',
-                description: 'this cover all chapter 1'
-        },{
-                header: 'midterm2-201',
-                description: 'this cover all chapter 3'
-                }]
+        // let midterms = [{
+        //         header: 'midterm1-183',
+        //         description: 'this cover all chapter 1'
+        // },{
+        //         header: 'midterm2-201',
+        //         description: 'this cover all chapter 3'
+        //         }]
 
 app.get('/courses/:course',  async (req, res) => {
         var quizzes;
-        await department.findOne({"courses.courseHeader":`${req.params.course}`}).then((results)=>
+        var majors;
+        var midterms;
+        await department.findOne({"courses.header":`${req.params.course}`}).then((results)=>
         {
-                //res.send(results)
-                //console.log(results.courses);
                 quizzes = results.courses[0].quizzes; 
-                //console.log(quizzes);
-                quizzes = results.courses[0].quizzes; 
-
-
-                
+                console.log(results.courses[0]);
+                majors = results.courses[0].majors; 
+                midterms = results.courses[0].midterms; 
 
         }).catch((err)=>{
                 console.log(err);
@@ -296,7 +309,7 @@ app.post('/explore/add/:department/courses',async (req, res) => {
         const departmentName=req.params.department;
         const {ID,description}=req.body;
         console.log(ID,description, departmentName);
-        const update=await department.updateOne({departmentName:departmentName},{$push: {courses:{courseHeader: req.body.ID, courseDescription: description}}})
+        const update=await department.updateOne({departmentName:departmentName},{$push: {courses:{header: req.body.ID, description: description}}})
 
         
 

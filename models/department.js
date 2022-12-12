@@ -8,10 +8,10 @@ const departmentSchema = new Schema({
     },
     courses:[
         {
-        courseHeader:{
+        header:{
         type: String,
         },
-        courseDescription:
+        description:
         {
         type: String,
         }
