@@ -1,10 +1,12 @@
+
+/// testing 
 import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
 import User from './models/User.js'
 //import department from './models/department.js'
 import Courses from './models/Course.js'
-
+import mysql from 'mysql'
 
 // const courseRouter = require('routes/courseRoutes.js')
 // because ES6 doesn't have __dirname
@@ -13,6 +15,22 @@ const __dirname = path.resolve()
 // express app
 const app = express();
 
+const connection = mysql.createPool({
+        host : "localhost",
+        user :"root",
+        password : "Db123@123"
+    })
+    
+    connection.getConnection(function(err){
+        if(err)
+        {
+            console.log(err);
+        }
+        else{
+            console.log('connected mysql');
+        }
+    });
+    
 //for testing
 //const user = new User({
 //        firstname:'jamel'
@@ -150,7 +168,6 @@ app.get('/courses/:course/exams/:exam', (req, res) => {
         //request for exam questions data as above (you can take the course name and exam name by req.params.course , req.params.exam)
         console.log(req.params.course)//for testing
         console.log(req.params.exam)
-
         res.render('main', { examName: req.params.exam, user: 'admin', questions: questions, page: 'exam' })
 
 })
@@ -181,27 +198,38 @@ app.get('/courses/:course/add/:examType/exam', (req, res) => {
 app.post('/courses/:course/add/:examType/exam/data', async(req, res) => {
         console.log('test');
         console.log(req.body)//add those data to database
-                
-                //const department = new department({
-                        //        department:'Mathimatics'
-                        //        ,courseHeader: 'math101'
-                        //        ,courseDescription:'deriviatives'
-                        //
-                        //}).save()
         res.redirect(`/courses/${req.params.course}`);
 })
 
 //reciveing data of the added course, add the course to database then redirect the user to the explore page
 app.post('/explore/add/:department/courses',async (req, res) => {
         //console.log(req.body)//add those data to database
+        const depName= req.params.department
+        console.log(depName);
+        connection.query(`select departmentID from examlydb.department where replace(departmentName,' ','') = '${depName}'`, function(err,results,fields){
+                if(err)
+                console.log(err);
+                else
+                console.log("DONE");
+                const depID=JSON.parse(JSON.stringify(results))
+                const courseName = req.body.ID;
+                const description= req.body.description;
+                console.log(req.body);
+                console.log(courseName,description,depID);
+                const departmentID = depID[0].departmentID
+               // console.log(departmentID);
 
+                connection.query('INSERT INTO examlydb.course (`courseName`,`department_departmentID`,`description`) VALUES(?,?,?)',[courseName,departmentID,description],(err,res)=>{
+                if(err)
+                console.log(err);
+                else
+                console.log("DONE");
+        })
+                if(err){
+                        console.log(err);
+                }
+        })
 
-        // ### will add the data from the form to the 'courses' ###
-        const{ID,description}=req.body;
-                const newCourse = new Courses({
-                        ID:ID,
-                        description:description})
-                        .save()
 
 
         res.redirect(`/explore`);
