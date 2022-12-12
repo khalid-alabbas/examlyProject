@@ -223,6 +223,8 @@ app.get('/courses/:course',  async (req, res) => {
                 //console.log(results.courses);
                 quizzes = results.courses[0].quizzes; 
                 //console.log(quizzes);
+                quizzes = results.courses[0].quizzes; 
+
 
                 
 
@@ -291,15 +293,12 @@ app.post('/courses/:course/add/:examType/exam/data', async(req, res) => {
 //reciveing data of the added course, add the course to database then redirect the user to the explore page
 app.post('/explore/add/:department/courses',async (req, res) => {
 
-        const Newdepartments = new department({
-                departmentName:'test',
-                    courses:[
-                        {
-                        courseHeader:'math101',
-                        courseDescription:'math101math101'
-                }
-        ]
-                }).save()
+        const departmentName=req.params.department;
+        const {ID,description}=req.body;
+        console.log(ID,description, departmentName);
+        const update=await department.updateOne({departmentName:departmentName},{$push: {courses:{courseHeader: req.body.ID, courseDescription: description}}})
+
+        
 
         res.redirect(`/explore`);
 
