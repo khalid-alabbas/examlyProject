@@ -18,14 +18,26 @@ const departmentSchema = new Schema({
         ,quizzes:[{
             header:{type: String},
             description:{type: String},
+            questions : [{
+                question: {type: String},
+                answers: [{type: String}]
+            }]
         }]
         ,majors:[{
             header:{type: String},
             description:{type: String},
+            questions : [{
+                question: {type: String},
+                answers: [{type: String}]
+            }]
         }]
         ,midterms:[{
             header:{type: String},
             description:{type: String},
+            questions : [{
+                question: {type: String},
+                answers: [{type: String}]
+            }]
         }]
     }]
     

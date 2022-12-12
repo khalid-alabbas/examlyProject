@@ -137,12 +137,9 @@ app.use(express.static('public'))
 // ]
 //         }).save()
 
-//const department = new department({
-        //        department:'Mathimatics'
-        //        ,courseHeader: 'math101'
-        //        ,courseDescription:'deriviatives' 
-        //        
-        //}).save()
+//########### to ADD new Department ##############
+// const departments = new department({
+//         departmentName:'physics'}).save()
 
 
 
