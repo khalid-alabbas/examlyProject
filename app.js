@@ -106,11 +106,11 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 // const Newdepartments = new department({
-//         departmentName:'math',
+//         departmentName:'CHEM',
 //             courses:[
 //                 {
-//                 courseHeader:'math101',
-//                 courseDescription:'Description for math 101'
+//                 header:'CHEM101',
+//                 description:'Description for math 101'
 //                 ,quizzes:[{
 //                         header:'quiz1',
 //                         description:'this test',
@@ -119,18 +119,18 @@ app.use(express.static('public'))
 //                         description:'this test2',
 //                     }]
 //                     ,majors:[{
-//                         header: 'major1--183',
+//                         header: 'major1--193',
 //                         description: 'this cover all chapter 1'
 //                     },{
-//                         header: 'major2--182',
+//                         header: 'major2--192',
 //                         description: 'this cover all chapter 2'
 //                     }
 //                 ]
 //                     ,midterms:[{
-//                         header: 'midterm1-183',
+//                         header: 'midterm1-202',
 //                         description: 'this cover all chapter 1'
 //                     },{
-//                         header: 'midterm1-191',
+//                         header: 'midterm1-202',
 //                         description: 'this cover all chapter 1'
 //                     }]
 //         }
@@ -139,7 +139,7 @@ app.use(express.static('public'))
 
 //########### to ADD new Department ##############
 // const departments = new department({
-//         departmentName:'physics'}).save()
+//         department:'Physics'}).save()
 
 // let user = ({
 //         firstname: 'naif',
@@ -181,7 +181,7 @@ app.use(express.static('public'))
 //                 description: 'c#'
 //                 }
 //                 ]}]
-//                 courseHeader
+                
 
 app.get('/explore', async (req, res) => {
         // get database request for departemnts like the dummy objects above for rendering the explore page
@@ -191,7 +191,7 @@ app.get('/explore', async (req, res) => {
         await department.find({department}).then((results)=>
         {
                 //res.send(results)
-                //console.log(results.courses);
+                console.log(results.departmentName);
                 departments = results;
                 console.log(results);
 
