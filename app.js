@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
-import User from './models/User.js'
+import { Department, Course, Exam, Question } from './models/Department.js'
 
 
 // const courseRouter = require('routes/courseRoutes.js')
@@ -12,7 +12,7 @@ const __dirname = path.resolve()
 const app = express();
 
 //for testing
-const user = new User({username:'jamel aldin'}).save()
+// const user = new User({username:'jamel aldin'}).save()
 
 
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(express.urlencoded({extended: true}))
 
 
 // mongoDB databese connection 
-const dbURI = 'mongodb+srv://khalid:t1234@examlydb.nyagend.mongodb.net/examly?retryWrites=true&w=majority' 
+const dbURI = 'mongodb+srv://admin:admin123@cluster0.7ssfmdl.mongodb.net/?retryWrites=true&w=majority' 
 mongoose.connect(dbURI).then((result) => app.listen(3000)).catch((err) => (console.log(err)))
 
 
@@ -35,7 +35,7 @@ app.use(express.static('public'))
 
 
 let departments = [{
-        department: 'Mathimatics',
+        departmentName: 'Mathimatics',
         courses: [{
                 header: 'math101',
                 description: 'deriviatives'
@@ -46,7 +46,7 @@ let departments = [{
                 ]},
         
         {
-        department: 'Information and computer',
+        departmentName: 'Information and computer',
         courses: [{
                 header: 'ics101',
                 description: 'javascript'
@@ -54,10 +54,26 @@ let departments = [{
                 header: 'ics102',
                 description: 'c#'
                 }
-                ]}]
+                ]
+        }]
+                
+
+const dp = Department.find({ 'departmentName.courses': 'math102' }, (err, data) => {
+        if (err) {
+                console.log(err.message)
+        } else {
+                console.log(data)
+        }
+})
 
 app.get('/explore', (req, res) => {
         // get database request for departemnts like the dummy objects above for rendering the explore page
+
+
+
+
+
+
         res.render('main', { user: 'admin', departments: departments, page:'explore'})
 })
 
