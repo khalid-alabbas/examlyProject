@@ -21,8 +21,12 @@ function sendExam(btn) {
                 questions.push({ question: questionText, answers:answers })
         }
 
-        let exam = {examName:examName, questions: questions, correct_Answers:correct_Answers}
-        fetch(window.location.pathname +'/data', {
+        
+
+        let exam = { examName: examName, questions: questions, correct_Answers: correct_Answers }
+        console.log(exam)
+        fetch(window.location.pathname + '/data', {
+                
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(exam)

@@ -10,14 +10,10 @@
                                         <img src="/images/Office-Chillout.png">
                                 </div>
                 </div>
-        
-
         <div class="explore-flex">
                 <% departments.forEach((el)=>{%>
-                        <%-include("../../public/components/cards-slider.ejs",{type:'courses',title:el.department, cards:el.courses})%>
-                <%}) %> 
-                
-
+                        <%-include("../../public/components/cards-slider.ejs",{type:'courses',title:el.departmentName, cards:el.courses})%>
+                <%}) %>
         </div>
         </div>
 
