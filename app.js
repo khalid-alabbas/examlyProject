@@ -4,7 +4,7 @@ import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
 import User from './models/User.js'
-import {department ,departmentSchema} from './models/department.js'
+import {department} from './models/department.js'
 import Courses from './models/Course.js'
 import mysql from 'mysql'
 
@@ -15,21 +15,21 @@ const __dirname = path.resolve()
 // express app
 const app = express();
 
-const connection = mysql.createPool({
-        host : "localhost",
-        user :"root",
-        password : "Db123@123"
-    })
+// const connection = mysql.createPool({
+//         host : "localhost",
+//         user :"root",
+//         password : "Db123@123"
+//     })
     
-    connection.getConnection(function(err){
-        if(err)
-        {
-            console.log(err);
-        }
-        else{
-            console.log('connected mysql');
-        }
-    });
+//     connection.getConnection(function(err){
+//         if(err)
+//         {
+//             console.log(err);
+//         }
+//         else{
+//             console.log('connected mysql');
+//         }
+//     });
     
 //tring for signin/up popup 
 //import bodyParser from 'body-parser'

@@ -45,4 +45,4 @@ const departmentSchema = new Schema({
 
 const department = mongoose.model('department', departmentSchema)
 
-export {department ,departmentSchema}
+export {department}
