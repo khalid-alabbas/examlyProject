@@ -7,6 +7,8 @@ import User from './models/User.js'
 import {department} from './models/department.js'
 import Courses from './models/Course.js'
 import mysql from 'mysql'
+//bringing users from userRoutes:
+// import users from './routes/userRoutes.js'
 
 // const courseRouter = require('routes/courseRoutes.js')
 // because ES6 doesn't have __dirname
@@ -32,10 +34,8 @@ const app = express();
 //     });
     
 //tring for signin/up popup 
-//import bodyParser from 'body-parser'
-//defining mogoose and parser (NOT working!)
-// var bodyParser = require('body-parser')
-// var mongoose = require('mongoose')
+import bodyParser from 'body-parser'
+
 
 
 //for testing (//tring for signin/up popup ):
@@ -48,8 +48,8 @@ const app = express();
 //         res.set({
 //                 "Allow-access-Allow-Origin": '*' 
 //         })
-// }).listen(2000);
-// console.log('listning in port 2000');
+// }).listen(3000);
+// console.log('listning in port 3000');
 
 
 
@@ -140,6 +140,22 @@ app.use(express.static('public'))
 //########### to ADD new Department ##############
 // const departments = new department({
 //         departmentName:'physics'}).save()
+
+// let user = ({
+//         firstname: 'naif',
+//         lastname:'allu',
+//         email:'alza3@gmail.com',
+//         password:'Nn112233',
+// })
+// user.save((err)=>{
+//         if(!err){
+//                 console.log('its reserved')
+//                 console.log(user)
+//         }
+// })
+//bring user routes: Error so i did by import
+// const users = require('./routes/userRoutes.js')  
+// app.use('/users', users)
 
 
 
@@ -325,7 +341,7 @@ app.use((req, res) => {
 
 
 //tring for signin/up popup 
-// db.once('open', ()=> console.log('connected to Db'))
+// mongoose.Connection.once('open', ()=> console.log('connected to Db'))
 // app.post('/signup',(req,res)=>{
 //    var firstname = req.body.firstname;      
 //    var lastname = req.body.lastname;      
@@ -345,6 +361,6 @@ app.use((req, res) => {
 //         }
 //         console.log("Record insert seccussfully!");
 //    });
-//    //redirect to seccuful-popup : i don't think we need it bcz i done it in signin-up-poppup file
-// //    return res.redirect('signin-up-popup.ejs')     
+   //redirect to seccuful-popup : i don't think we need it bcz i done it in signin-up-poppup file
+//    return res.redirect('signin-up-popup.ejs')     
 // })

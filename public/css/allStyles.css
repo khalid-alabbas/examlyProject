@@ -225,6 +225,129 @@
   cursor: pointer;
 }
 
+.popup {
+  position: absolute;
+  top: -150%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  background-color: #f5f5f5;
+  width: 380px;
+  padding: 20px 30px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  transition: transform 0.4s, center 0.4s;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: #f5f5f5;
+}
+
+.close-btn {
+  height: 15px;
+  text-align: right;
+  border-radius: 15px;
+  cursor: pointer;
+  outline: none;
+}
+
+.popup form .form h2 {
+  text-align: center;
+  margin: 10px 0px 20px;
+  font-size: 25px;
+  color: #8854C0;
+}
+
+.popup form .form h4 {
+  text-align: center;
+  margin: 10px 0px 20px;
+  font-size: 14px;
+}
+
+.popup > form > .form > .form-elemnet {
+  margin: 15px;
+}
+
+.password-lable, .email-lable, .Fname-label, .Lname-label {
+  font-size: 15px;
+}
+
+.popup > form > .form > .form-elemnet > input[type=email],
+.popup > form > .form > .form-elemnet > input[type=Fname],
+.popup > form > .form > .form-elemnet > input[type=Lname],
+.popup > form > .form > .form-elemnet > input[type=password] {
+  display: block;
+  outline: none;
+  margin-top: 5px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.forgot-password {
+  margin: 5px;
+}
+
+.Signin-btn, .send-btn, .Continue-btn {
+  width: 100%;
+  height: 40%;
+  font-size: 16px;
+  color: #f5f5f5;
+  background: #8854C0;
+  border-radius: 10px;
+  border: 0px;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sign-up-link, .sign-in-link, .forgot-password {
+  display: inline;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.sign-up-link, .sign-in-link {
+  margin-left: 5px;
+}
+
+.register-para {
+  display: flex;
+  width: 100%;
+}
+
+.forgot-img {
+  text-align: center;
+  height: 150px;
+}
+
+.tick-img {
+  /* height: 130px; */
+  /* width:180px; */
+  width: 50%;
+  /* margin-top: -135px; */
+  margin-top: -8.59375vw;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* transform: translate translate(48%, 5%); */
+  margin-left: 6.40625vw;
+}
+
+.examly-logo {
+  text-align: center;
+  height: 80px;
+  transform: translate(145%, 5%) scale(1.1);
+}
+
 #theme-btn {
   height: 26px;
   min-width: 26px;
@@ -262,6 +385,73 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+#heading-aboutUs, #heading-membersInfo, #heading-aim {
+  margin: 40px 0;
+  font-size: 30px;
+}
+
+#heading-aboutUs {
+  margin-top: 0;
+}
+
+.inner-content {
+  /* justify-content: center;
+  align-items: center;
+  height: 100%; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin: 3vh auto 4vh auto;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.aboutUs-content {
+  display: block;
+  align-items: center;
+  text-align: center;
+  margin: 20px 50px;
+}
+
+.info-container {
+  background-color: rgb(255, 255, 255);
+  /* display: block; */
+  display: flex;
+  flex-direction: column;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  margin: 10px 30px;
+  padding: 20px 30px;
+  border-radius: 30px;
+}
+
+.para {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+}
+
+.info-container h4 {
+  color: #8854C0;
+  font-size: 20px;
+}
+
+.twitter-icon {
+  width: 28px;
+  height: 33px;
+  margin: 0;
+}
+
+.linkin-icon {
+  width: 37px;
+  height: 37px;
+  margin: 0;
 }
 
 .course-container {
