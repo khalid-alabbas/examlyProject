@@ -4,10 +4,10 @@ import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
 // import { Department, Course, Exam, Question } from './models/Department.js'
-import User from './models/User.js'
+import {User} from './models/User.js'
 import { department } from './models/department.js'
 import Courses from './models/Course.js'
-import mysql from 'mysql'
+
 //bringing users from userRoutes:
 // import users from './routes/userRoutes.js'
 
