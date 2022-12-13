@@ -3,20 +3,46 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const departmentSchema = new Schema({
-    department:{
+    departmentName:{
         type: String,
-        required: true
     },
-    courseHeader:{
+    courses:[
+        {
+        header:{
         type: String,
-        required: true
-    },
-    courseDescription:{
+        },
+        description:
+        {
         type: String,
-        required: true
-    }
+        }
+        ,quizzes:[{
+            header:{type: String},
+            description:{type: String},
+            questions : [{
+                question: {type: String},
+                answers: [{type: String}]
+            }]
+        }]
+        ,majors:[{
+            header:{type: String},
+            description:{type: String},
+            questions : [{
+                question: {type: String},
+                answers: [{type: String}]
+            }]
+        }]
+        ,midterms:[{
+            header:{type: String},
+            description:{type: String},
+            questions : [{
+                question: {type: String},
+                answers: [{type: String}]
+            }]
+        }]
+    }]
+    
 })
 
-const department = mongoose.model('User', userSchema)
+const department = mongoose.model('department', departmentSchema)
 
-export default department
+export {department ,departmentSchema}
