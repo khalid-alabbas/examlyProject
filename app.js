@@ -241,11 +241,21 @@ app.get('/courses/:title/:course', async (req, res) => {
         var majors;
         var midterms;
         await department.findOne({ "courses.header": `${req.params.course}` }).then((results) => {
-                quizzes = results.courses[0].quizzes;
-                // console.log(results.courses[0]);
-                majors = results.courses[0].majors;
-                midterms = results.courses[0].midterms;
+                
+                let x = results.courses[0].header;
 
+                console.log(results.courses.length);
+                // console.log(results.courses);
+                for(let i=0; i< results.courses.length;i++){
+                        x = results.courses[i].header;
+                        console.log(x);
+                        if( x == `${req.params.course.toString()}`){
+                                midterms = results.courses[i].midterms;
+                                quizzes = results.courses[i].quizzes;
+                                majors = results.courses[i].majors;
+                                console.log(midterms);
+                        }
+                }
         }).catch((err) => {
                 console.log(err);
         })
@@ -319,7 +329,7 @@ app.get('/courses/:title/:course/exams/:examType/:exam', async (req, res) => {
                 console.log(err);
         })
         console.log(questions);
-        res.render('main', { examName: req.params.exam, user: 'admin', questions: questions, page: 'exam' })
+        res.render('main', { examName: req.params.exam, user: 'admin', questions: shuffle(questions), page: 'exam' })
 
 })
 
@@ -363,7 +373,6 @@ app.post('/courses/:title/:course/exams/:examType/:exam/reviewExam', async(req, 
                                         if (midterms[j].header == `${examType.toString()}`) {
                                                 questions = midterms[j].questions 
                                                 correctAnswers = midterms[j].correct_Answers
-
                                         }
                                 }
                         }
@@ -442,9 +451,9 @@ app.post('/courses/:title/:course/add/:examType/exam/data', async (req, res) => 
         if (quizheader == 'quizzes') {
                 const update = await department.updateOne({ "courses.header": courseheader }, { $push: { "courses.$.quizzes": { header: header, description: description, questions: questions, correct_Answers: correct_Answers } } })
         }
-        if (quizheader == 'majors') {
+        else if (quizheader == 'majors') {
                 const update = await department.updateOne({ "courses.header": courseheader }, { $push: { "courses.$.majors": { header: header, description: description, questions: questions, correct_Answers: correct_Answers } } })
-        } else {
+        }else if(quizheader == 'midterms') {
                 const update = await department.updateOne({ "courses.header": courseheader }, { $push: { "courses.$.midterms": { header: header, description: description, questions: questions, correct_Answers: correct_Answers } } })
         }
         res.redirect(`/courses/${req.params.title}/${req.params.course}`);
@@ -463,7 +472,18 @@ app.post('/explore/add/:department/courses', async (req, res) => {
         res.redirect(`/explore`);
 
 })
+function shuffle(questions) {
+        for (let question of questions) {
+                question.answers = getShuffledArr(question.answers)
+        }
+        return questions
+}
 
+const getShuffledArr = arr => {
+    if (arr.length === 1) {return arr};
+    const rand = Math.floor(Math.random() * arr.length);
+    return [arr[rand], ...getShuffledArr(arr.filter((_, i) => i != rand))];
+};
 // handling the requests for 404 page
 app.use((req, res) => {
         req.on('data', (data) => {
