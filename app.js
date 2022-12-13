@@ -5,7 +5,7 @@ import path from 'path'
 import mongoose from 'mongoose'
 // import { Department, Course, Exam, Question } from './models/Department.js'
 import User from './models/User.js'
-import {department} from './models/department.js'
+import { department } from './models/department.js'
 import Courses from './models/Course.js'
 import mysql from 'mysql'
 //bringing users from userRoutes:
@@ -23,7 +23,7 @@ const app = express();
 //         user :"root",
 //         password : "Db123@123"
 //     })
-    
+
 //     connection.getConnection(function(err){
 //         if(err)
 //         {
@@ -33,7 +33,7 @@ const app = express();
 //             console.log('connected mysql');
 //         }
 //     });
-    
+
 //tring for signin/up popup 
 import bodyParser from 'body-parser'
 import { copyFileSync } from 'fs'
@@ -89,12 +89,13 @@ import { copyFileSync } from 'fs'
 // })
 // console.log('resulst: ', res);
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 
 
 // mongoDB databese connection 
+mongoose.set('strictQuery', true);
 const dbURI = 'mongodb+srv://khalid:t1234@examlydb.nyagend.mongodb.net/examly?retryWrites=true&w=majority'
 mongoose.connect(dbURI).then((result) => app.listen(3000)).catch((err) => (console.log(err)))
 
@@ -207,7 +208,7 @@ app.use(express.static('public'))
 //                 description: 'integraion formulas'
 //                 }
 //                 ]},
-        
+
 //         {
 //         department: 'Information and computer',
 //         courses: [{
@@ -218,24 +219,23 @@ app.use(express.static('public'))
 //                 description: 'c#'
 //                 }
 //                 ]}]
-                
+
 
 app.get('/explore', async (req, res) => {
         // get database request for departemnts like the dummy objects above for rendering the explore page
-        
+
         // ############### is done but need help to find where does it go.
         var departments;
-        await department.find({department}).then((results)=>
-        {
+        await department.find({ department }).then((results) => {
                 //res.send(results)
                 // console.log(results.departmentName);
                 departments = results;
                 // console.log(results);
 
-        }).catch((err)=>{
+        }).catch((err) => {
                 console.log(err);
         })
-        res.render('main', { user: 'admin', departments: departments, page:'explore'})
+        res.render('main', { user: 'admin', departments: departments, page: 'explore' })
 
         // connection.query(`select departmentID, departmentName,courseName,description from examlydb.department join examlydb.course ON department.departmentID=course.department_departmentID`, function(err,results,fields){
         //         if(err)
@@ -246,55 +246,54 @@ app.get('/explore', async (req, res) => {
         //         const depID=JSON.parse(JSON.stringify(results))
         //         // console.log(depID);
         //         })
-                // let departments = [{
-                //         department: 'Mathimatics',
-                //         courses: [{
-                //                 header: 'math101',
-                //                 description: 'deriviatives'
-                //                 }
-                //                 ]}]
+        // let departments = [{
+        //         department: 'Mathimatics',
+        //         courses: [{
+        //                 header: 'math101',
+        //                 description: 'deriviatives'
+        //                 }
+        //                 ]}]
 })
 
 
-        // let quizzes = [{
-        //         header: 'quiz1-183',
-        //         description: 'this cover all chapter 1'
-        // },{
-        //         header: 'quiz2-201',
-        //         description: 'this cover all chapter 3'
-        //         }]
-        
-        // let majors = [{
-        //         header: 'major1-183',
-        //         description: 'this cover all chapter 1'
-        // },{
-        //         header: 'major2-201',
-        //         description: 'this cover all chapter 3'
-        // }]
-                
-        // let midterms = [{
-        //         header: 'midterm1-183',
-        //         description: 'this cover all chapter 1'
-        // },{
-        //         header: 'midterm2-201',
-        //         description: 'this cover all chapter 3'
-        //         }]
+// let quizzes = [{
+//         header: 'quiz1-183',
+//         description: 'this cover all chapter 1'
+// },{
+//         header: 'quiz2-201',
+//         description: 'this cover all chapter 3'
+//         }]
 
-app.get('/courses/:course',  async (req, res) => {
+// let majors = [{
+//         header: 'major1-183',
+//         description: 'this cover all chapter 1'
+// },{
+//         header: 'major2-201',
+//         description: 'this cover all chapter 3'
+// }]
+
+// let midterms = [{
+//         header: 'midterm1-183',
+//         description: 'this cover all chapter 1'
+// },{
+//         header: 'midterm2-201',
+//         description: 'this cover all chapter 3'
+//         }]
+
+app.get('/courses/:course', async (req, res) => {
         var quizzes;
         var majors;
         var midterms;
-        await department.findOne({"courses.header":`${req.params.course}`}).then((results)=>
-        {
-                quizzes = results.courses[0].quizzes; 
+        await department.findOne({ "courses.header": `${req.params.course}` }).then((results) => {
+                quizzes = results.courses[0].quizzes;
                 // console.log(results.courses[0]);
-                majors = results.courses[0].majors; 
-                midterms = results.courses[0].midterms; 
+                majors = results.courses[0].majors;
+                midterms = results.courses[0].midterms;
 
-        }).catch((err)=>{
+        }).catch((err) => {
                 console.log(err);
         })
-        res.render('main', {courseName:req.params.id,user: 'admin', quizzes: quizzes , page:'course', majors:majors , midterms: midterms})
+        res.render('main', { courseName: req.params.id, user: 'admin', quizzes: quizzes, page: 'course', majors: majors, midterms: midterms })
         //console.log(quizzes);
         // request to database to get the course as shown above (you can take the course name by req.params.course)
 })
@@ -321,32 +320,54 @@ app.get('/courses/:course/exams/:exam', async (req, res) => {
         // console.log(req.params.course)//for testing
         // console.log(req.params.exam)
         let questions = [];
-        await department.findOne({"courses.header": req.params.course }).then((results)=>
-        {
+        await department.findOne({ "courses.header": req.params.course }).then((results) => {
 
                 console.log('"/courses/:course/exams/:exam"');
                 //const courseName= req.params.course
-                
                 const courses = results.courses;
-                const examType = req.params.exam
-                const courseName= req.params.course
+                const examType = req.params.exam;
+                const courseName = req.params.course;
+                const examTypeMatch = examType.toLowerCase;
                 //const courses = results.courses;
-                for (let i=0; i < courses.length; i++) {                // loop through array of objects
-                if (courses[i].header == `${courseName.toString()}`) {               // check if header matches the evaluation condition
-                        const quizzes = courses[i].quizzes              // save the object's quizzes in constant variable
-                        //console.log(quizzes[i]);
-                        for (let j=0; j < quizzes.length; j++ ){        // loop through array of objects
-                        if (quizzes[j].header == `${examType.toString()}`) {      // compare quiz name to get this puzzle solution
 
-                                //console.log(quizzes[j].questions); 
-                                questions = quizzes[j].questions                                  // {"quizName":"test2"} is the output after checking this condition
-                        }
+                for (let i = 0; i < courses.length; i++) {                // loop through array of objects
+                        if (courses[i].header == `${courseName.toString()}`) {               // check if header matches the evaluation condition
+
+                                if (examTypeMatch == 'quizzes') {
+                                        const quizzes = courses[i].quizzes;
+                                        for (let j = 0; j < quizzes.length; j++) {        // loop through array of objects
+                                                if (quizzes[j].header == `${examType.toString()}`) {      // compare quiz name to get this puzzle solution
+
+                                                        //console.log(quizzes[j].questions); 
+                                                        questions = quizzes[j].questions                                  // {"quizName":"test2"} is the output after checking this condition
+                                                }
+                                        }
+                                } else if (examTypeMatch == 'majors') {
+                                        const majors = courses[i].majors;
+                                        for (let j = 0; j < majors.length; j++) {        // loop through array of objects
+                                                if (majors[j].header == `${examType.toString()}`) {      // compare quiz name to get this puzzle solution
+
+                                                        //console.log(quizzes[j].questions); 
+                                                        questions = majors[j].questions;                               // {"quizName":"test2"} is the output after checking this condition
+                                                }
+                                        }
+                                } else {
+                                        const midterms = courses[i].midterms;
+                                        for (let j = 0; j < midterms.length; j++) {        // loop through array of objects
+                                                if (midterms[j].header == `${examType.toString()}`) {      // compare quiz name to get this puzzle solution
+
+                                                        //console.log(quizzes[j].questions); 
+                                                        questions = midterms[j].questions                                  // {"quizName":"test2"} is the output after checking this condition
+                                                }
+                                        }
+                                }
+                                // save the object's quizzes in constant variable
+                                //console.log(quizzes[i]);
                         }
                 }
-                }
-                
-                
-        }).catch((err)=>{
+
+
+        }).catch((err) => {
                 console.log(err);
         })
         console.log(questions);
@@ -364,7 +385,7 @@ app.post('/courses/:course/exams/:exam/reviewExam', (req, res) => {
 
         //dummy correct answers object (in real database get the questions of exam as the object above and the correct answers)
         let correctAnswers = ['apple', 'i hate toefl', 'chicken', 'no']
-        res.render('main', {user: 'admin',recivedAnsewrs:recivedAnsewrs ,questions: questions, correctAnswers: correctAnswers, page:'review'})
+        res.render('main', { user: 'admin', recivedAnsewrs: recivedAnsewrs, questions: questions, correctAnswers: correctAnswers, page: 'review' })
 
 
 })
@@ -373,11 +394,11 @@ app.post('/courses/:course/exams/:exam/reviewExam', (req, res) => {
 app.get('/courses/:course/add/:examType/exam', (req, res) => {
         // reciving course and examType(could be Quizzes or Midterms or Majors)
         //send the form for adding the exam (no database query required here!!)
-        res.render('main', {user:'admin',examType:req.params.examType, page:'addexam'})
+        res.render('main', { user: 'admin', examType: req.params.examType, page: 'addexam' })
 })
 
 //reciveing data of the added exam, add the exam to database then redirect the user to the course page
-app.post('/courses/:course/add/:examType/exam/data',async(req, res) => {
+app.post('/courses/:course/add/:examType/exam/data', async (req, res) => {
         console.log('data');
         console.log(req.body)
         const header = req.body.examName
@@ -388,29 +409,29 @@ app.post('/courses/:course/add/:examType/exam/data',async(req, res) => {
         const quizheader = req.params.examType.toLowerCase()
 
         // const update=await department.updateOne({departmentName:departmentName},{$push: {courses:{header: req.body.ID, description: description}}})
-        console.log(req.params.course,req.params.examType.toLowerCase());
+        console.log(req.params.course, req.params.examType.toLowerCase());
         console.log(req.body)//add those data to database
 
-        if(quizheader=='quizzes'){
-        const update=await department.updateOne({"courses.header":courseheader},{$push: {"courses.$.quizzes":{header: header, description: description,questions:questions,correct_Answers:correct_Answers}}})
+        if (quizheader == 'quizzes') {
+                const update = await department.updateOne({ "courses.header": courseheader }, { $push: { "courses.$.quizzes": { header: header, description: description, questions: questions, correct_Answers: correct_Answers } } })
         }
-        if (quizheader=='majors') {
-        const update=await department.updateOne({"courses.header":courseheader},{$push: {"courses.$.majors":{header: header, description: description,questions:questions,correct_Answers:correct_Answers}}})
+        if (quizheader == 'majors') {
+                const update = await department.updateOne({ "courses.header": courseheader }, { $push: { "courses.$.majors": { header: header, description: description, questions: questions, correct_Answers: correct_Answers } } })
         } else {
-        const update=await department.updateOne({"courses.header":courseheader},{$push: {"courses.$.midterms":{header: header, description: description,questions:questions,correct_Answers:correct_Answers}}})
+                const update = await department.updateOne({ "courses.header": courseheader }, { $push: { "courses.$.midterms": { header: header, description: description, questions: questions, correct_Answers: correct_Answers } } })
         }
         res.redirect(`/courses/${req.params.course}`);
 })
 
 //reciveing data of the added course, add the course to database then redirect the user to the explore page
-app.post('/explore/add/:department/courses',async (req, res) => {
+app.post('/explore/add/:department/courses', async (req, res) => {
 
-        const departmentName=req.params.department;
-        const {ID,description}=req.body;
+        const departmentName = req.params.department;
+        const { ID, description } = req.body;
         // console.log(ID,description, departmentName);
-        const update=await department.updateOne({departmentName:departmentName},{$push: {courses:{header: req.body.ID, description: description}}})
+        const update = await department.updateOne({ departmentName: departmentName }, { $push: { courses: { header: req.body.ID, description: description } } })
 
-        
+
 
         res.redirect(`/explore`);
 
@@ -426,20 +447,20 @@ app.use((req, res) => {
 
 
 
-//tring for signin/up popup 
+//tring for signin/up popup
 // mongoose.Connection.once('open', ()=> console.log('connected to Db'))
 // app.post('/signup',(req,res)=>{
-//    var firstname = req.body.firstname;      
-//    var lastname = req.body.lastname;      
-//    var email = req.body.email;      
-//    var password = req.body.password;      
+//    var firstname = req.body.firstname;
+//    var lastname = req.body.lastname;
+//    var email = req.body.email;
+//    var password = req.body.password;
 
 //    var user = {
 //         "firstname": firstname,
 //         "lastname": lastname,
 //         "email": email,
 //         "password": password,
-//         }   
+//         }
 
 //    db.collection('users').insertOne(user, (err,collection)=>{
 //         if(err){
@@ -448,5 +469,5 @@ app.use((req, res) => {
 //         console.log("Record insert seccussfully!");
 //    });
    //redirect to seccuful-popup : i don't think we need it bcz i done it in signin-up-poppup file
-//    return res.redirect('signin-up-popup.ejs')     
+//    return res.redirect('signin-up-popup.ejs')
 // })
