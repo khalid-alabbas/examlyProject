@@ -36,6 +36,7 @@ const app = express();
     
 //tring for signin/up popup 
 import bodyParser from 'body-parser'
+import { copyFileSync } from 'fs'
 
 
 
@@ -299,40 +300,56 @@ app.get('/courses/:course',  async (req, res) => {
 })
 
 
-let questions = [{
-        question: 'what is mana mana?',
-        answers: ['apple', 'orange', 'banana']
-}, {
-        question: 'What does the man mean?',
-        answers: ['i hate toefl', 'orange', 'banana']
-        },
-        {
-        question: 'is ant chicken or fish?',
-        answers: ['both', 'chicken', 'fish']
-        },
-        {
-        question: 'some fox said: all the foxes are liers. should we believe him?',
-        answers: ['yes', 'no']
-        }
-]
+// let questions = [{
+//         question: 'what is mana mana?',
+//         answers: ['apple', 'orange', 'banana']
+// }, {
+//         question: 'What does the man mean?',
+//         answers: ['i hate toefl', 'orange', 'banana']
+//         },
+//         {
+//         question: 'is ant chicken or fish?',
+//         answers: ['both', 'chicken', 'fish']
+//         },
+//         {
+//         question: 'some fox said: all the foxes are liers. should we believe him?',
+//         answers: ['yes', 'no']
+//         }
+// ]
 app.get('/courses/:course/exams/:exam', async (req, res) => {
         //request for exam questions data as above (you can take the course name and exam name by req.params.course , req.params.exam)
         // console.log(req.params.course)//for testing
         // console.log(req.params.exam)
+        let questions = [];
         await department.findOne({"courses.header": req.params.course }).then((results)=>
         {
-                
-                // quizzes = results.courses[0].quizzes; 
-                console.log(results.courses);
-                // majors = results.courses[0].majors; 
-                // midterms = results.courses[0].midterms; 
 
+                console.log('"/courses/:course/exams/:exam"');
+                //const courseName= req.params.course
                 
+                const courses = results.courses;
+                const examType = req.params.exam
+                const courseName= req.params.course
+                //const courses = results.courses;
+                for (let i=0; i < courses.length; i++) {                // loop through array of objects
+                if (courses[i].header == `${courseName.toString()}`) {               // check if header matches the evaluation condition
+                        const quizzes = courses[i].quizzes              // save the object's quizzes in constant variable
+                        //console.log(quizzes[i]);
+                        for (let j=0; j < quizzes.length; j++ ){        // loop through array of objects
+                        if (quizzes[j].header == `${examType.toString()}`) {      // compare quiz name to get this puzzle solution
 
+                                //console.log(quizzes[j].questions); 
+                                questions = quizzes[j].questions                                  // {"quizName":"test2"} is the output after checking this condition
+                        }
+                        }
+                }
+                }
+                
+                
         }).catch((err)=>{
                 console.log(err);
         })
-
+        console.log(questions);
         res.render('main', { examName: req.params.exam, user: 'admin', questions: questions, page: 'exam' })
 
 })
