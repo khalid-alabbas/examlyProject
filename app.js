@@ -106,37 +106,71 @@ app.set('view engine', 'ejs')
 // middleware of static files (public folder)
 app.use(express.static('public'))
 
-// const Newdepartments = new department({
-//         departmentName:'CHEM',
-//             courses:[
-//                 {
-//                 header:'CHEM101',
-//                 description:'Description for math 101'
-//                 ,quizzes:[{
-//                         header:'quiz1',
-//                         description:'this test',
-//                     },{
-//                         header:'quiz2',
-//                         description:'this test2',
-//                     }]
-//                     ,majors:[{
-//                         header: 'major1--193',
-//                         description: 'this cover all chapter 1'
-//                     },{
-//                         header: 'major2--192',
-//                         description: 'this cover all chapter 2'
-//                     }
-//                 ]
-//                     ,midterms:[{
-//                         header: 'midterm1-202',
-//                         description: 'this cover all chapter 1'
-//                     },{
-//                         header: 'midterm1-202',
-//                         description: 'this cover all chapter 1'
-//                     }]
-//         }
-// ]
-//         }).save()
+const Newdepartments = new department({
+        departmentName:'mgt',
+            courses:[
+                {
+                header:'mgt210',
+                description:'Description for math 101'
+                ,quizzes:[{
+                        header:'quiz1',
+                        description:'this test',
+                        questions : [{
+                                        question: 'test Q',
+                                        answers: ['a','b']
+                        }]
+                                ,correct_Answers:['a']
+                    },{
+                        header:'quiz2',
+                        description:'this test2',
+                        questions : [{
+                                        question: 'test Q',
+                                        answers: ['a','b']
+                        }]
+                                ,correct_Answers:['a']
+                    }]
+                    ,majors:[{
+                        header: 'major1--193',
+                        description: 'this cover all chapter 1'
+                        ,
+                        questions : [{
+                                        question: 'test Q',
+                                        answers: ['a','b']
+                        }]
+                                ,correct_Answers:['a']
+                    },{
+                        header: 'major2--192',
+                        description: 'this cover all chapter 2'
+                        ,
+                        questions : [{
+                                        question: 'test Q',
+                                        answers: ['a','b']
+                        }]
+                                ,correct_Answers:['a']
+                    }
+                ]
+                    ,midterms:[{
+                        header: 'midterm1-202',
+                        description: 'this cover all chapter 1'
+                        ,
+                        questions : [{
+                                        question: 'test Q',
+                                        answers: ['a','b']
+                        }]
+                                ,correct_Answers:['a']
+                    },{
+                        header: 'midterm1-202',
+                        description: 'this cover all chapter 1'
+                        ,
+                        questions : [{
+                                        question: 'test Q',
+                                        answers: ['a','b']
+                        }]
+                                ,correct_Answers:['a']
+                    }]
+        }
+]
+        }).save()
 
 //########### to ADD new Department ##############
 // const departments = new department({
@@ -157,6 +191,7 @@ app.use(express.static('public'))
 //bring user routes: Error so i did by import
 // const users = require('./routes/userRoutes.js')  
 // app.use('/users', users)
+
 
 
 
@@ -280,10 +315,24 @@ let questions = [{
         answers: ['yes', 'no']
         }
 ]
-app.get('/courses/:course/exams/:exam', (req, res) => {
+app.get('/courses/:course/exams/:exam', async (req, res) => {
         //request for exam questions data as above (you can take the course name and exam name by req.params.course , req.params.exam)
         // console.log(req.params.course)//for testing
         // console.log(req.params.exam)
+        await department.findOne({"courses.header": req.params.course }).then((results)=>
+        {
+                
+                // quizzes = results.courses[0].quizzes; 
+                console.log(results.courses);
+                // majors = results.courses[0].majors; 
+                // midterms = results.courses[0].midterms; 
+
+                
+
+        }).catch((err)=>{
+                console.log(err);
+        })
+
         res.render('main', { examName: req.params.exam, user: 'admin', questions: questions, page: 'exam' })
 
 })
@@ -311,9 +360,28 @@ app.get('/courses/:course/add/:examType/exam', (req, res) => {
 })
 
 //reciveing data of the added exam, add the exam to database then redirect the user to the course page
-app.post('/courses/:course/add/:examType/exam/data',(req, res) => {
+app.post('/courses/:course/add/:examType/exam/data',async(req, res) => {
         console.log('data');
+        console.log(req.body)
+        const header = req.body.examName
+        const description = req.body.examDes
+        const questions = req.body.questions
+        const correct_Answers = req.body.correct_Answers
+        const courseheader = req.params.course
+        const quizheader = req.params.examType.toLowerCase()
+
+        // const update=await department.updateOne({departmentName:departmentName},{$push: {courses:{header: req.body.ID, description: description}}})
+        console.log(req.params.course,req.params.examType.toLowerCase());
         console.log(req.body)//add those data to database
+
+        if(quizheader=='quizzes'){
+        const update=await department.updateOne({"courses.header":courseheader},{$push: {"courses.$.quizzes":{header: header, description: description,questions:questions,correct_Answers:correct_Answers}}})
+        }
+        if (quizheader=='majors') {
+        const update=await department.updateOne({"courses.header":courseheader},{$push: {"courses.$.majors":{header: header, description: description,questions:questions,correct_Answers:correct_Answers}}})
+        } else {
+        const update=await department.updateOne({"courses.header":courseheader},{$push: {"courses.$.midterms":{header: header, description: description,questions:questions,correct_Answers:correct_Answers}}})
+        }
         res.redirect(`/courses/${req.params.course}`);
 })
 

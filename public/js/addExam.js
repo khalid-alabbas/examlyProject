@@ -8,6 +8,7 @@ function sendExam(btn) {
         let correct_Answers = []
         let questionsElements = document.querySelectorAll('.question')
         let examName = document.querySelector('.exam-name').value
+        let examDes = document.querySelector('.exam-description').value
 
         for (question of questionsElements) {
                 let questionText = question.querySelector('.question-text').value
@@ -23,7 +24,7 @@ function sendExam(btn) {
 
         
 
-        let exam = { examName: examName, questions: questions, correct_Answers: correct_Answers }
+        let exam = { examName: examName,examDes:examDes, questions: questions, correct_Answers: correct_Answers }
         console.log(exam)
         fetch(window.location.pathname + '/data', {
                 

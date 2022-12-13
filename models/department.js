@@ -19,28 +19,30 @@ const departmentSchema = new Schema({
             header:{type: String},
             description:{type: String},
             questions : [{
-                question: {type: String},
-                answers: [{type: String}]
+                question: String,
+                answers: [String]
             }]
+            ,correct_Answers:[String]
         }]
         ,majors:[{
             header:{type: String},
             description:{type: String},
             questions : [{
-                question: {type: String},
-                answers: [{type: String}]
+                question: String,
+                answers: [String]
             }]
+            ,correct_Answers:[String]
         }]
         ,midterms:[{
             header:{type: String},
             description:{type: String},
             questions : [{
-                question: {type: String},
-                answers: [{type: String}]
+                question: String,
+                answers: [String]
             }]
+            ,correct_Answers:[String]
         }]
     }]
-    
 })
 
 const department = mongoose.model('department', departmentSchema)
