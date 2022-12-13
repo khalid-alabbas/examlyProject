@@ -106,71 +106,71 @@ app.set('view engine', 'ejs')
 // middleware of static files (public folder)
 app.use(express.static('public'))
 
-const Newdepartments = new department({
-        departmentName:'mgt',
-            courses:[
-                {
-                header:'mgt210',
-                description:'Description for math 101'
-                ,quizzes:[{
-                        header:'quiz1',
-                        description:'this test',
-                        questions : [{
-                                        question: 'test Q',
-                                        answers: ['a','b']
-                        }]
-                                ,correct_Answers:['a']
-                    },{
-                        header:'quiz2',
-                        description:'this test2',
-                        questions : [{
-                                        question: 'test Q',
-                                        answers: ['a','b']
-                        }]
-                                ,correct_Answers:['a']
-                    }]
-                    ,majors:[{
-                        header: 'major1--193',
-                        description: 'this cover all chapter 1'
-                        ,
-                        questions : [{
-                                        question: 'test Q',
-                                        answers: ['a','b']
-                        }]
-                                ,correct_Answers:['a']
-                    },{
-                        header: 'major2--192',
-                        description: 'this cover all chapter 2'
-                        ,
-                        questions : [{
-                                        question: 'test Q',
-                                        answers: ['a','b']
-                        }]
-                                ,correct_Answers:['a']
-                    }
-                ]
-                    ,midterms:[{
-                        header: 'midterm1-202',
-                        description: 'this cover all chapter 1'
-                        ,
-                        questions : [{
-                                        question: 'test Q',
-                                        answers: ['a','b']
-                        }]
-                                ,correct_Answers:['a']
-                    },{
-                        header: 'midterm1-202',
-                        description: 'this cover all chapter 1'
-                        ,
-                        questions : [{
-                                        question: 'test Q',
-                                        answers: ['a','b']
-                        }]
-                                ,correct_Answers:['a']
-                    }]
-        }
-]
-        }).save()
+// const Newdepartments = new department({
+//         departmentName:'mgt',
+//             courses:[
+//                 {
+//                 header:'mgt210',
+//                 description:'Description for math 101'
+//                 ,quizzes:[{
+//                         header:'quiz1',
+//                         description:'this test',
+//                         questions : [{
+//                                         question: 'test Q',
+//                                         answers: ['a','b']
+//                         }]
+//                                 ,correct_Answers:['a']
+//                     },{
+//                         header:'quiz2',
+//                         description:'this test2',
+//                         questions : [{
+//                                         question: 'test Q',
+//                                         answers: ['a','b']
+//                         }]
+//                                 ,correct_Answers:['a']
+//                     }]
+//                     ,majors:[{
+//                         header: 'major1--193',
+//                         description: 'this cover all chapter 1'
+//                         ,
+//                         questions : [{
+//                                         question: 'test Q',
+//                                         answers: ['a','b']
+//                         }]
+//                                 ,correct_Answers:['a']
+//                     },{
+//                         header: 'major2--192',
+//                         description: 'this cover all chapter 2'
+//                         ,
+//                         questions : [{
+//                                         question: 'test Q',
+//                                         answers: ['a','b']
+//                         }]
+//                                 ,correct_Answers:['a']
+//                     }
+//                 ]
+//                     ,midterms:[{
+//                         header: 'midterm1-202',
+//                         description: 'this cover all chapter 1'
+//                         ,
+//                         questions : [{
+//                                         question: 'test Q',
+//                                         answers: ['a','b']
+//                         }]
+//                                 ,correct_Answers:['a']
+//                     },{
+//                         header: 'midterm1-202',
+//                         description: 'this cover all chapter 1'
+//                         ,
+//                         questions : [{
+//                                         question: 'test Q',
+//                                         answers: ['a','b']
+//                         }]
+//                                 ,correct_Answers:['a']
+//                     }]
+//         }
+// ]
+//         }).save()
 
 //########### to ADD new Department ##############
 // const departments = new department({
