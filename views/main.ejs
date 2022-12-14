@@ -17,11 +17,6 @@
         <% if (user != 'quest'){ %>
         <% if (page == 'explore'){ modal_type = 'Course'} else{modal_type="Exam"} %> 
         <%- include('../public/components/popup.ejs',{modal_type:modal_type}) %>
-        <%- include('../public/components/signin-popup.ejs') %>
-        <%- include('../public/components/signup-popup.ejs') %>
-        <%- include('../public/components/successful-signin-popup.ejs') %>
-        <%- include('../public/components/successful-signup-popup.ejs') %>
-        <%- include('../public/components/forgotPass-popup.ejs') %>
 
         <% } %>
         <div class="main-container">
@@ -42,7 +37,6 @@
         <script src="/js/explore.js"></script>
         <script src="/js/layout-navigator.js"></script>
         <script src="/js/addExam.js"></script>
-        <script src="/js/signin-up-forgot-popup.js"></script>
 
 </body>
 </html>

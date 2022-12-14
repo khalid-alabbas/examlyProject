@@ -264,6 +264,36 @@ app.get('/courses/:title/:course', async (req, res) => {
         // request to database to get the course as shown above (you can take the course name by req.params.course)
 })
 
+app.get('/Register', async (req, res, next) => {
+        res.render('Register')
+})
+
+//post to signup page:
+app.post('/Register/Done', async (req,res,next)=>{
+        console.log(req.body)
+        // let firstname = req.body.fname;
+        // let lastname = req.body.lname;
+        // let email = req.body.email;
+        // let password = req.body.password;
+             
+        //      User.save()
+        
+        await User( {firstname: req.body.Fname,
+                lastname: req.body.Lname,
+                email: req.body.email,
+                password: req.body.password
+        }).save()
+        console.log("added")
+        var departments;
+        await department.find({ department }).then((results) => {
+                departments = results;
+        }).catch((err) => {
+                console.log(err);
+        })
+        res.render('main', { user: 'admin', departments: departments, page: 'explore' })
+     })
+       
+
 
 // let questions = [{
 //         question: 'what is mana mana?',

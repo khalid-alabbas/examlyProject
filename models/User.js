@@ -1,27 +1,16 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-const favoriteSchema=new Schema({
-        userId:{
+const resultsSchema = new Schema({
+        userId: {
                 type: String,
                 required: true
         },
-        courseId:{
-                type: String,
-                required: true
-        }
-
-})
-const resultsSchema=new Schema({
-        userId:{
+        exam: {
                 type: String,
                 required: true
         },
-        exam:{
-                type: String,
-                required: true
-        },
-        score:{
+        score: {
                 type: String,
                 required: true
         }
@@ -29,23 +18,20 @@ const resultsSchema=new Schema({
 const userSchema = new Schema({
         firstname: {
                 type: String,
-                required: true
         }
-        ,lastname:{
+        , lastname: {
                 type: String,
-                required: true
         }
-        ,email:{
+        , email: {
                 type: String,
-                required: true
         }
-        ,password:{
+        , password: {
                 type: String,
-                required: true
         },
-        favCourses:[favoriteSchema]
-        ,
-        results:[resultsSchema]
+        banned: {
+                type: Boolean,
+        },
+        results: [resultsSchema]
 })
 
 const User = mongoose.model('User', userSchema)
