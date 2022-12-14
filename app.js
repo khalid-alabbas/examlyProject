@@ -195,8 +195,7 @@ app.use(express.static('public'))
 // const users = require('./routes/userRoutes.js')  
 // app.use('/users', users)
 
-
-
+let user;
 
 app.get('/explore', async (req, res) => {
         // get database request for departemnts like the dummy objects above for rendering the explore page
@@ -208,7 +207,38 @@ app.get('/explore', async (req, res) => {
         }).catch((err) => {
                 console.log(err);
         })
-        res.render('main', { user: 'admin', departments: departments, page: 'explore' })
+        let admin = 'admin'
+        let quest = 'quest'
+        
+        
+        res.render('main', { user: user, departments: departments, page: 'explore' })
+})
+
+app.post('/explore', async (req, res) => {
+        // get database request for departemnts like the dummy objects above for rendering the explore page
+
+        // ############### is done but need help to find where does it go.
+        var departments;
+        await department.find({ department }).then((results) => {
+                departments = results;
+        }).catch((err) => {
+                console.log(err);
+        })
+        let email= req.body.email
+        let password= req.body.password
+        let adminemail='atv@outlook.sa'
+        let adminpassword ='1234'
+        let admin = 'admin'
+        let quest = 'quest'
+        let user;
+        if(adminemail == email && adminpassword == password){
+                user = admin
+        }
+        else{
+                user = quest
+        }
+        
+        res.render('main', { user: user, departments: departments, page: 'explore' })
 })
 
 
@@ -268,8 +298,14 @@ app.get('/Register', async (req, res, next) => {
         res.render('Register')
 })
 
+app.get('/LogOut', async (req, res, next) => {
+        let quest = 'quest'
+        user = quest;
+        res.redirect('/explore')
+})
+
 //post to signup page:
-app.post('/Register/Done', async (req,res,next)=>{
+app.post('/Register', async (req,res,next)=>{
         console.log(req.body)
         // let firstname = req.body.fname;
         // let lastname = req.body.lname;

@@ -46,7 +46,7 @@
                 <!-- About us -->
                 <div class="menu-element">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAAXNSR0IArs4c6QAAAjFJREFUaEPt2k1SwjAUB/C8bGAnR+AIeAL1BnoDuUFdANmJu8BGbiA30CPgDbiB3EC8QOPEkZnqtH0vH21emXbbNuTXf/OaNoA40w3O1CV6WNeS7RNrOzGl1DjP8yshxFgIcZBSvmutD9R+sExMKXVvjHkWQowKkCMAPGittxQcO9gv6qWq8wAwpeBYwTDUCUvBsYFRUVQcC1iWZaPBYGALwwVl/FBwLGC2o7PZbCKl3DnibEG5LKuWbGC+uKrxlgymlLrWWtuE/myuyQHAk9Z6+b+dJLBCodiuVqtpCI5NYiXVLwT3BQCT5GOspqR74Ywxd+v1+q2skrZ2KxKeU0447CHdCoyAOl10Eg5D2cYahzmgSDgAyJLPFT1QtTg7Q9lsNkfK7KSxxAJQtTgKqrFbMQIqGBc9sYioHxwA3JTNULDkosIaQJFeKht9jnFCRRtj3FBRYBxRwTCuqCAYZ5Q3jDvKC9YFlDOsKygnWJdQZFjXUGTYYrH4/LdAgE3VKvdTXhK9Gy+ciM4V7XKOMeYjyo8RFxSi/BbWyHw+vwWAV+w4bH9bSZ36QUlsaYx5xDpet79tFGmMKaV2xhi7sui1pUCRYCGFIxUKhYUUjpQoFOZbOFKjUJhSyrlwcEBRYC6Fwy4QkD5melUhx5Nqy31N4bCIvRBil+f5Xkq5d/kPhmMfvQ6vhBUKB3tEmbwSZj8nD4fDEbckqPGhMw9qQ9yO62HcEsH60yeGXSFu+882sW8JBHVGT2adLgAAAABJRU5ErkJggg==" /> 
-                        About Us
+                About Us
                 </div>
 
                 
@@ -56,11 +56,10 @@
 
 <hr>
         <% if (user=='quest'){ %> 
-                <button>SIGN IN</button>
+                <button onclick=openReg()>SIGN IN</button>
         <% }else{ %>
-                <button onclick=openPopup()>UPLOAD</button>
-        <% } %> 
-
+                <button onclick=OutReg()>logout</button>
+        <% } %>
 </div>
 
 
@@ -68,6 +67,11 @@
         function exploreEvent() {
                 window.location.href = `/explore`
         }
-
+        function openReg() {
+                window.location.href = `/Register`
+        }
+        function OutReg() {
+                window.location.href = `/LogOut`
+        }
        //comment ;)
 </script>
