@@ -230,7 +230,6 @@ app.post('/explore', async (req, res) => {
         let adminpassword ='1234'
         let admin = 'admin'
         let quest = 'quest'
-        let user;
         if(adminemail == email && adminpassword == password){
                 user = admin
         }
@@ -289,7 +288,7 @@ app.get('/courses/:title/:course', async (req, res) => {
         }).catch((err) => {
                 console.log(err);
         })
-        res.render('main', { courseName: req.params.id, user: 'admin', quizzes: quizzes, page: 'course', majors: majors, midterms: midterms })
+        res.render('main', { courseName: req.params.id, user: user, quizzes: quizzes, page: 'course', majors: majors, midterms: midterms })
         //console.log(quizzes);
         // request to database to get the course as shown above (you can take the course name by req.params.course)
 })
@@ -326,7 +325,7 @@ app.post('/Register', async (req,res,next)=>{
         }).catch((err) => {
                 console.log(err);
         })
-        res.render('main', { user: 'admin', departments: departments, page: 'explore' })
+        res.render('main', { user: user, departments: departments, page: 'explore' })
      })
        
 
@@ -395,7 +394,7 @@ app.get('/courses/:title/:course/exams/:examType/:exam', async (req, res) => {
                 console.log(err);
         })
         console.log(questions);
-        res.render('main', { examName: req.params.exam, user: 'admin', questions: shuffle(questions), page: 'exam' })
+        res.render('main', { examName: req.params.exam, user: user, questions: shuffle(questions), page: 'exam' })
 
 })
 
@@ -487,7 +486,7 @@ app.post('/courses/:title/:course/exams/:examType/:exam/reviewExam', async(req, 
 
         //dummy correct answers object (in real database get the questions of exam as the object above and the correct answers)
         //let correctAnswers = ['apple', 'i hate toefl', 'chicken', 'no']
-        res.render('main', { user: 'admin', recivedAnsewrs: recivedAnsewrs, questions: questions, correctAnswers: correctAnswers, page: 'review' })
+        res.render('main', { user: user, recivedAnsewrs: recivedAnsewrs, questions: questions, correctAnswers: correctAnswers, page: 'review' })
 
 
 })
@@ -496,7 +495,7 @@ app.post('/courses/:title/:course/exams/:examType/:exam/reviewExam', async(req, 
 app.get('/courses/:title/:course/add/:examType/exam', (req, res) => {
         // reciving course and examType(could be Quizzes or Midterms or Majors)
         //send the form for adding the exam (no database query required here!!)
-        res.render('main', { user: 'admin', examType: req.params.examType, page: 'addexam' })
+        res.render('main', { user: user, examType: req.params.examType, page: 'addexam' })
 })
 
 //reciveing data of the added exam, add the exam to database then redirect the user to the course page
